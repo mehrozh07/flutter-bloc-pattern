@@ -1,29 +1,37 @@
-import 'package:blocs_patteren/internet_connection_bloc/internet_connection.dart';
+import 'package:blocs_patteren/authentication/auth_cubit.dart';
+import 'package:blocs_patteren/cubits/internet_cubit.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'mian-screens/home_screen.dart';
+import 'mian-screens/phoneAuth/signin_screen.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(
+      MultiBlocProvider(
+       providers: [
+        BlocProvider(create: (_)=> AuthCubit()),
+         BlocProvider(create: (_)=> InternetCubit()),
+       ],
+          child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
+
   const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-  create: (context) => InternetConnection(),
-  child: MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const HomeScreen(),
-    ),
-);
+    return MaterialApp(
+        title: 'Flutter Demo',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: SigninScreen(),
+      );
   }
 }
 

@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'package:blocs_patteren/internet_connection_bloc/internet_event.dart';
-import 'package:blocs_patteren/internet_connection_bloc/internet_state.dart';
+import 'package:blocs_patteren/blocs/internet_event.dart';
+import 'package:blocs_patteren/blocs/internet_state.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
 class InternetConnection extends Bloc<InternetEvent , InternetState>{

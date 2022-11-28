@@ -18,6 +18,10 @@ dependencies:
   bloc: ^8.1.0
   flutter_bloc: ^8.1.1
   connectivity_plus: ^3.0.2
+  email_validator: ^2.1.17
+  firebase_auth: ^4.1.4
+  firebase_core: ^2.3.0
+  cloud_firestore: ^4.1.0
 
 dev_dependencies:
   flutter_test:

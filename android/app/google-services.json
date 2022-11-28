@@ -1,0 +1,92 @@
+{
+  "project_info": {
+    "project_number": "443556997567",
+    "project_id": "fir-ec264",
+    "storage_bucket": "fir-ec264.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:443556997567:android:144daff8fe78ecdf8ed90a",
+        "android_client_info": {
+          "package_name": "com.example.blocs_patteren"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "443556997567-v8toj6maesdp7npppkd1uqpvhmke0c89.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.blocs_patteren",
+            "certificate_hash": "bb4de42416323d246f2bc659ee69e97ccacc0afd"
+          }
+        },
+        {
+          "client_id": "443556997567-un81fepv2s6j1od2mdoki59si6k2lq31.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAG1YXD5x7ne8cmB3Bc3tc8EzflJUHHdyE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "443556997567-un81fepv2s6j1od2mdoki59si6k2lq31.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:443556997567:android:5e65421d3b9dd2b78ed90a",
+        "android_client_info": {
+          "package_name": "tech.mehroz.firebase_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "443556997567-qe4md644ur054oee8sm4d5nulfjdeb9h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tech.mehroz.firebase_project",
+            "certificate_hash": "5056ed6546f060d57d63a8064128047df20adb03"
+          }
+        },
+        {
+          "client_id": "443556997567-un6ih45ui5h4d7f96tvu8a4s4bmctgde.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tech.mehroz.firebase_project",
+            "certificate_hash": "bb4de42416323d246f2bc659ee69e97ccacc0afd"
+          }
+        },
+        {
+          "client_id": "443556997567-un81fepv2s6j1od2mdoki59si6k2lq31.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAG1YXD5x7ne8cmB3Bc3tc8EzflJUHHdyE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "443556997567-un81fepv2s6j1od2mdoki59si6k2lq31.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,5 +1,4 @@
-import 'package:blocs_patteren/internet_connection_bloc/internet_connection.dart';
-import 'package:blocs_patteren/internet_connection_bloc/internet_state.dart';
+import 'package:blocs_patteren/cubits/internet_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,10 +20,8 @@ class HomeScreen extends StatelessWidget {
           //TODO: This is just example of Internet Connection checking using Bloc Pattern.
           // TODO: Here I used to BlocBuilder for check Internet Connection.
           // TODO:'BlocBuilder is used to check state only in UI Form. Its really nice state management.
-
           //TODO: Use of BlocListner?
           //TODO: BlocListner is used to show state in background not in UI form.
-
           //TODO: What Shoud be used to show both Ui form state and background sate?
           //TODO: Bloc Concumer is muxture of both to show both UI form on screen and background
           const Text(
@@ -34,9 +31,9 @@ class HomeScreen extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
-          BlocConsumer<InternetConnection, InternetState>(
+          BlocConsumer<InternetCubit, InternetState>(
             listener: (context, state) {
-              if (state is InternetGainedState) {
+              if (state == InternetState.gainedState) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Row(
@@ -53,7 +50,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 );
               }
-              else if (state is InternetLostState) {
+              else if (state == InternetState.lostState) {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   content: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -71,7 +68,7 @@ class HomeScreen extends StatelessWidget {
               }
             },
             builder: (context, state) {
-              if (state is InternetGainedState) {
+              if (state == InternetState.gainedState) {
                 return const Text(
                   'Your Internet is Connected',
                   style: TextStyle(
@@ -79,7 +76,7 @@ class HomeScreen extends StatelessWidget {
                       color: Colors.blue,
                       fontWeight: FontWeight.bold),
                 );
-              } else if (state is InternetLostState) {
+              } else if (state == InternetState.lostState) {
                 return const Text(
                   'Your Internet is Not Connected',
                   style: TextStyle(
