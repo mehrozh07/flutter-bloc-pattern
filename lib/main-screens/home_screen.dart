@@ -1,4 +1,6 @@
+import 'package:blocs_patteren/authentication/auth_cubit.dart';
 import 'package:blocs_patteren/cubits/internet_cubit.dart';
+import 'package:blocs_patteren/main-screens/phoneAuth/signin_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +14,40 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Connectivity Plus"),
         centerTitle: true,
+        actions: [
+          BlocConsumer<AuthCubit, AuthState>(
+            listener: (context, state) {
+              if(state is AuthLogOutState){
+                Navigator.popUntil(context, (route) => route.isFirst);
+                Navigator.pushReplacement(context, CupertinoPageRoute(builder: (context)=> SigninScreen()));
+              }
+            },
+            builder: (context, state) {
+              return IconButton(
+                  onPressed: () {
+                    showDialog<void>(
+                      context: context,
+                      barrierDismissible: true,
+                      builder: (BuildContext dialogContext) {
+                        return CupertinoAlertDialog(
+                          title: const Text('Sign Out'),
+                          content: const Text('Are Your Sure?'),
+                          actions: <Widget>[
+                            TextButton(
+                              child: const Text('Sign Out'),
+                              onPressed: () {
+                                BlocProvider.of<AuthCubit>(context).logout();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                  icon: const Icon(Icons.logout));
+            },
+          )
+        ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -37,17 +73,17 @@ class HomeScreen extends StatelessWidget {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
-                    Icon(CupertinoIcons.wifi, color: Colors.green,),
-                    SizedBox(width: 8),
-                    Text('Internet Connection Restored'),
-                  ],
-                ),
-                  backgroundColor: Colors.black54,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: const [
+                        Icon(CupertinoIcons.wifi, color: Colors.green,),
+                        SizedBox(width: 8),
+                        Text('Internet Connection Restored'),
+                      ],
+                    ),
+                    backgroundColor: Colors.black54,
                     behavior: SnackBarBehavior.floating,
-                ),
+                  ),
                 );
               }
               else if (state == InternetState.lostState) {

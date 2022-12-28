@@ -1,37 +1,57 @@
+import 'package:blocs_patteren/api_practice/data/models/repositries/post_repositries.dart';
+import 'package:blocs_patteren/api_practice/logic/post_cubit.dart';
 import 'package:blocs_patteren/authentication/auth_cubit.dart';
 import 'package:blocs_patteren/cubits/internet_cubit.dart';
+import 'package:blocs_patteren/main-screens/home_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'mian-screens/phoneAuth/signin_screen.dart';
+import 'api_practice/data/models/PostModel.dart';
+import 'api_practice/presentation/screens/home_screen.dart';
+import 'main-screens/phoneAuth/signin_screen.dart';
 
-Future<void> main() async{
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(
-      MultiBlocProvider(
-       providers: [
-        BlocProvider(create: (_)=> AuthCubit()),
-         BlocProvider(create: (_)=> InternetCubit()),
-       ],
-          child: const MyApp()));
+
+  PostRepository postRepository = PostRepository();
+  List<PostModel> postModels = await postRepository.fetchApi();
+
+  runApp(MultiBlocProvider(providers: [
+    BlocProvider(create: (_) => AuthCubit()),
+    BlocProvider(create: (_) => InternetCubit()),
+    BlocProvider(create: (_) => PostCubit()),
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
-
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: SigninScreen(),
-      );
+      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        primaryColor: Colors.black,
+      ),
+      darkTheme: ThemeData.dark(),
+      home: const HomePage(),
+      // BlocBuilder<AuthCubit, AuthState>(
+      //   buildWhen: (oldState, newState) {
+      //     return oldState is AuthInitial;
+      //   },
+      //   builder: (context, state) {
+      //     if (state is LoggedInState) {
+      //       return const HomeScreen();
+      //     } else if (state is AuthLogOutState) {
+      //       return const HomePage();
+      //     }
+      //     return const Scaffold();
+      //   },
+      // ),
+    );
   }
 }
 

@@ -1,12 +1,19 @@
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
-import 'package:meta/meta.dart';
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  var auth = FirebaseAuth.instance;
-  AuthCubit() : super(AuthInitial());
+  final auth = FirebaseAuth.instance;
+
+  AuthCubit() : super(AuthInitial()){
+    User? user = auth.currentUser;
+    if(user != null){
+      emit(LoggedInState(user));
+    }else{
+      emit(AuthLogOutState());
+    }
+  }
 
   String? verificationId;
 
@@ -48,8 +55,13 @@ class AuthCubit extends Cubit<AuthState> {
         emit(LoggedInState(userCredential.user));
       }
     } on FirebaseAuthException catch(e){
-      print(e.message.toString());
+      if (kDebugMode) {
+        print(e.message.toString());
+      }
     }
   }
-
+ void logout() async{
+    auth.signOut();
+    emit(AuthLogOutState());
+ }
 }
