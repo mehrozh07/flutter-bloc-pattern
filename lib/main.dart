@@ -8,20 +8,18 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'Firebase-Blocs/Add-Data-Blocs/app_bloc.dart';
-import 'api_practice/presentation/screens/home_screen.dart';
 
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  runApp(
-  //     MultiBlocProvider(providers: [
-  //   BlocProvider(create: (_) => AuthCubit()),
-  //   BlocProvider(create: (_) => InternetCubit()),
-  //   BlocProvider(create: (_) => PostCubit()),
-  // ], child:
-      const MyApp());
+  runApp(MultiBlocProvider(providers: [
+    BlocProvider(create: (_) => AuthCubit()),
+    BlocProvider(create: (_) => InternetCubit()),
+    BlocProvider(create: (_) => PostCubit()),
+  ],
+      child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -37,7 +35,9 @@ class MyApp extends StatelessWidget {
           primaryColor: Colors.black,
         ),
         darkTheme: ThemeData.dark(),
-        home: const MyHomePage()
+        home: RepositoryProvider(
+            create: (BuildContext context)=> ProductRepository(),
+        child: const MyHomePage())
       // BlocBuilder<AuthCubit, AuthState>(
       //   buildWhen: (oldState, newState) {
       //     return oldState is AuthInitial;
@@ -55,15 +55,8 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key,});
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
 
 
   @override
